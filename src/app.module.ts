@@ -2,19 +2,20 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import databaseConfig from './config/database.config';
+import swaggerConfig from './config/swagger.config';
 import appConfig from './config/app.config';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
-import { JazzModule } from './service/playlist/jazz/jazz.module';
+import { JazzModule } from './services/playlist/jazz/jazz.module';
 import { LoggerMiddleware } from './common/middleware/logger.middleware';
-import { UserHttpModule } from './service/user/user-http.module';
+import { UserHttpModule } from './services/user/user-http.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env.development',
       isGlobal: true,
-      load: [appConfig, databaseConfig]
+      load: [appConfig, databaseConfig, swaggerConfig]
     }),
     DatabaseModule,
     JazzModule,

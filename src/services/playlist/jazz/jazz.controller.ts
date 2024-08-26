@@ -10,10 +10,13 @@ import {
 } from '@nestjs/common';
 import { CreateJazzDto } from './dto/create-jazz.dto';
 import { JazzService } from './jazz.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('playlist/jazz')
+@ApiTags('playlist/jazz')
 export class JazzController {
   constructor(private jazzService: JazzService) {}
+
   @Post()
   async create(@Body() createJazzDto: CreateJazzDto) {
     this.jazzService.create(createJazzDto);
